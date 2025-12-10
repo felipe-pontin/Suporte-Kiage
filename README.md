@@ -4,22 +4,22 @@ O projeto oferece um menu interativo e executa automaticamente com privilégios 
 
 Funcionalidades
 
-Soluções de Rede
+-Soluções de Rede
 (IP, ping, flush DNS, central de redes)
 
-Soluções de Impressoras
+-Soluções de Impressoras
 (reinício do spooler, gerenciamento de dispositivos)
 
-Soluções do Sistema
+-Soluções do Sistema
 (informações do sistema, processos, dispositivos)
 
-Windows Update
+-Windows Update
 (reinício de serviços, limpeza de cache, status)
 
-Windows Defender
+-Windows Defender
 (verificações, atualização de definições, status)
 
-Autoelevação para Administrador
+-Inclui submenu de limpeza avançada, com funções comuns de help desk (TEMP, DNS, Prefetch)
 
 Navegação rápida com CHOICE
 
