@@ -1,6 +1,6 @@
-KIAGE é um assistente local desenvolvido em Batch Script (.bat) para automatizar tarefas comuns de suporte técnico em ambientes Windows.
+O projeto é um assistente local desenvolvido em Batch Script (.bat) para automatizar tarefas comuns de suporte técnico em ambientes Windows.
 
-O projeto oferece um menu interativo e executa automaticamente com privilégios de administrador, facilitando rotinas de help desk, manutenção e diagnóstico rápido do sistema.
+Oferecendo um menu interativo e executando automaticamente com privilégios de administrador, facilitando rotinas de help desk, manutenção e diagnóstico rápido do sistema.
 
 Funcionalidades
 
@@ -21,7 +21,7 @@ Funcionalidades
 
 -Inclui submenu de limpeza avançada, com funções comuns de help desk (TEMP, DNS, Prefetch)
 
-Navegação rápida com CHOICE
+Navegação rápida de escolha
 
 Objetivo
 
@@ -34,5 +34,5 @@ Executar o arquivo como .bat (o script solicita permição de administrador auto
 
 Observações:
 
-Projeto leve, sem dependências externas
+É umProjeto leve, sem dependências externas
 Ideal para help desk, laboratório, field support e aprendizado
