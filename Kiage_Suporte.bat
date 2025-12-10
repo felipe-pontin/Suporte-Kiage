@@ -9,269 +9,328 @@ if %errorlevel% neq 0 (
 
 chcp 65001 >nul
 title Assistente de Suporte Kiage - TI
-color 0B
+color 0F
 cls
 
 
 
 :menu
 cls
-echo ██╗  ██╗██╗ █████╗  ██████╗ ███████╗
-echo ██║ ██╔╝██║██╔══██╗██╔════╝ ██╔════╝
-echo █████╔╝ ██║███████║██║  ███╗█████╗  
-echo ██╔═██╗ ██║██╔══██║██║   ██║██╔══╝  
-echo ██║  ██╗██║██║  ██║╚██████╔╝███████╗
-echo ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-
-
-echo ===============================
-echo 1 - Solucoes de Rede
-echo 2 - Solucoes de Impressora
-echo 3 - Solucoes do Sistema
-echo 4 - Windows Update
-echo 5 - Windows Defender
-echo 6 - Sair
-echo ===============================
+echo                    █████   ████   ███                             
+echo                    ▒▒███   ███▒  ▒▒▒                              
+echo                     ▒███  ███    ████   ██████    ███████  ██████ 
+echo                     ▒███████    ▒▒███  ▒▒▒▒▒███  ███▒▒███ ███▒▒███
+echo                     ▒███▒▒███    ▒███   ███████ ▒███ ▒███▒███████ 
+echo                     ▒███ ▒▒███   ▒███  ███▒▒███ ▒███ ▒███▒███▒▒▒  
+echo                     █████ ▒▒████ █████▒▒████████▒▒███████▒▒██████ 
+echo                                                 ▒▒▒▒▒███   
+echo                                                  ███ ▒███         
+echo                                                 ▒▒██████                                                                                                  
+echo ====================================================================================
 echo.
-choice /c 123456 /n /m "Escolha uma opcao:"
+echo   1 - Solucoes de Rede
+echo   2 - Solucoes de Impressoras
+echo   3 - Limpezas do Sistema
+echo   4 - Windows Update
+echo   5 - Windows Defender
+echo.
+echo   [6] Sair
+echo.
+echo =====================================================================================
+echo.
+choice /c 123456 /n /m "Selecione uma opcao: "
 
 if errorlevel 6 exit
-if errorlevel 5 goto defender_menu
-if errorlevel 4 goto update_menu
-if errorlevel 3 goto sistema_menu
-if errorlevel 2 goto impressora_menu
-if errorlevel 1 goto rede_menu
+if errorlevel 5 goto DEFENDER_MENU
+if errorlevel 4 goto UPDATE_MENU
+if errorlevel 3 goto LIMPEZA_MENU
+if errorlevel 2 goto IMPRESSORA_MENU
+if errorlevel 1 goto REDE_MENU
 
-:: =============================
-:: MENU REDE
-:: =============================
-:rede_menu
+:: ==============================
+:REDE_MENU
 cls
-echo ===============================
-echo        SOLUCOES DE REDE
-echo ===============================
-echo 1 - Ver IP
-echo 2 - Testar Internet (Ping)
-echo 3 - Limpar DNS
-echo 4 - Central de Redes
+echo ===== SOLUCOES DE REDE =====
+echo.
+echo 1 - Ver configuracao IP
+echo 2 - Testar conectividade (Ping Google)
+echo 3 - Limpar cache DNS
+echo 4 - Abrir Central de Rede
+echo.
 echo 5 - Voltar
 echo.
-choice /c 12345 /n /m "Escolha:"
 
-if errorlevel 5 goto menu
-if errorlevel 4 goto centralrede
-if errorlevel 3 goto dns
-if errorlevel 2 goto ping
-if errorlevel 1 goto ip
+choice /c 12345 /n /m "Opcao: "
 
-:ip
-cls
-ipconfig
+if errorlevel 5 goto MENU
+if errorlevel 4 ncpa.cpl
+if errorlevel 3 ipconfig /flushdns
+if errorlevel 2 ping google.com -n 4
+if errorlevel 1 ipconfig
+
 pause
-goto rede_menu
+goto REDE_MENU
 
-:ping
+:: ==============================
+:IMPRESSORA_MENU
 cls
-ping google.com
-pause
-goto rede_menu
-
-:dns
-cls
-ipconfig /flushdns
-pause
-goto rede_menu
-
-:centralrede
-start ncpa.cpl
-goto rede_menu
-
-:: =============================
-:: MENU IMPRESSORA
-:: =============================
-:impressora_menu
-cls
-echo ===============================
-echo     SOLUCOES DE IMPRESSORA
-echo ===============================
-echo 1 - Reiniciar Spooler
-echo 2 - Dispositivos e Impressoras
-echo 3 - Configuracoes de Impressoras
-echo 4 - Voltar
+echo ==================== SOLUCOES DE IMPRESSORA ====================
 echo.
-choice /c 1234 /n /m "Escolha:"
-
-if errorlevel 4 goto menu
-if errorlevel 3 goto printers_settings
-if errorlevel 2 goto printers
-if errorlevel 1 goto spooler
-
-:spooler
-cls
-net stop spooler
-net start spooler
-echo Spooler reiniciado!
-pause
-goto impressora_menu
-
-:printers
-start control printers
-goto impressora_menu
-
-:printers_settings
-start ms-settings:printers
-goto impressora_menu
-
-:: =============================
-:: MENU SISTEMA
-:: =============================
-:sistema_menu
-cls
-echo ===============================
-echo      SOLUCOES DO SISTEMA
-echo ===============================
-echo 1 - Informacoes do Sistema
-echo 2 - Processos em Execucao
-echo 3 - Gerenciador de Dispositivos
-echo 4 - Voltar
+echo 1 - Listar impressoras instaladas
+echo 2 - Limpar fila de impressao
+echo 3 - Testar impressao (pagina de teste)
+echo 4 - Reiniciar servico Spooler
+echo 5 - Dispositivos e Impressoras
+echo 6 - Reinstalar / Gerenciar drivers
 echo.
-choice /c 1234 /n /m "Escolha:"
-
-if errorlevel 4 goto menu
-if errorlevel 3 goto devmgr
-if errorlevel 2 goto processos
-if errorlevel 1 goto sysinfo
-
-:sysinfo
-systeminfo
-pause
-goto sistema_menu
-
-:processos
-tasklist
-pause
-goto sistema_menu
-
-:devmgr
-devmgmt.msc
-goto sistema_menu
-
-:: =============================
-:: MENU WINDOWS UPDATE
-:: =============================
-:update_menu
-cls
-echo ===============================
-echo        WINDOWS UPDATE
-echo ===============================
-echo 1 - Abrir Windows Update
-echo 2 - Reiniciar Servicos
-echo 3 - Limpar Cache
-echo 4 - Forcar Verificacao
-echo 5 - Status dos Servicos
-echo 6 - Voltar
-echo.
-choice /c 123456 /n /m "Escolha:"
-
-if errorlevel 6 goto menu
-if errorlevel 5 goto wu_status
-if errorlevel 4 goto wu_force
-if errorlevel 3 goto wu_clean
-if errorlevel 2 goto wu_restart
-if errorlevel 1 goto wu_open
-
-:wu_open
-start ms-settings:windowsupdate
-goto update_menu
-
-:wu_restart
-cls
-net stop wuauserv
-net stop bits
-net start bits
-net start wuauserv
-pause
-goto update_menu
-
-:wu_clean
-cls
-net stop wuauserv
-net stop bits
-ren C:\Windows\SoftwareDistribution SoftwareDistribution.old
-net start bits
-net start wuauserv
-pause
-goto update_menu
-
-:wu_force
-cls
-wuauclt /detectnow /reportnow
-pause
-goto update_menu
-
-:wu_status
-sc query wuauserv
-sc query bits
-pause
-goto update_menu
-
-:: =============================
-:: MENU WINDOWS DEFENDER
-:: =============================
-:defender_menu
-cls
-echo ===============================
-echo    WINDOWS DEFENDER / SEGURANCA
-echo ===============================
-echo 1 - Abrir Seguranca do Windows
-echo 2 - Atualizar Definicoes
-echo 3 - Verificacao Rapida
-echo 4 - Verificacao Completa
-echo 5 - Status do Defender
-echo 6 - Reiniciar Servico
 echo 7 - Voltar
 echo.
-choice /c 1234567 /n /m "Escolha:"
+choice /c 1234567 /n /m "Opcao: "
 
-if errorlevel 7 goto menu
-if errorlevel 6 goto def_service
-if errorlevel 5 goto def_status
-if errorlevel 4 goto def_full
-if errorlevel 3 goto def_quick
-if errorlevel 2 goto def_update
-if errorlevel 1 goto def_open
+if errorlevel 7 goto MENU
+if errorlevel 6 goto GERENCIAR_DRIVER
+if errorlevel 5 goto DISPOSITIVOS_IMPRESSORA
+if errorlevel 4 goto REINICIAR_SPOOLER
+if errorlevel 3 goto TESTE_IMPRESSAO
+if errorlevel 2 goto LIMPAR_FILA
+if errorlevel 1 goto LISTAR_IMPRESSORAS
 
-:def_open
-start windowsdefender:
-goto defender_menu
 
-:def_update
+:: ---------- LISTAR IMPRESSORAS ----------
+:LISTAR_IMPRESSORAS
 cls
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -SignatureUpdate
+echo ================== IMPRESSORAS INSTALADAS ==================
+echo.
+wmic printer get name,default,status
+echo.
 pause
-goto defender_menu
+goto IMPRESSORA
 
-:def_quick
-cls
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 1
-pause
-goto defender_menu
 
-:def_full
+:: ---------- LIMPAR FILA DE IMPRESSAO ----------
+:LIMPAR_FILA
 cls
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 2
-pause
-goto defender_menu
+echo Limpando fila de impressao...
+net stop spooler >nul 2>&1
+del /q /f %systemroot%\System32\spool\PRINTERS\*.* >nul 2>&1
+net start spooler >nul 2>&1
+echo.
+echo Fila de impressao limpa com sucesso.
+timeout /t 2 >nul
+goto IMPRESSORA
 
-:def_status
-cls
-sc query WinDefend
-pause
-goto defender_menu
 
-:def_service
+:: ---------- TESTE DE IMPRESSAO ----------
+:TESTE_IMPRESSAO
 cls
-net stop WinDefend
-net start WinDefend
+echo Abrindo pagina de teste da impressora padrao...
+rundll32 printui.dll,PrintUIEntry /k
+timeout /t 2 >nul
+goto IMPRESSORA
+
+
+:: ---------- REINICIAR SPOOLER ----------
+:REINICIAR_SPOOLER
+cls
+echo Reiniciando servico de impressao...
+net stop spooler
+net start spooler
+timeout /t 2 >nul
+goto IMPRESSORA
+
+
+:: ---------- DISPOSITIVOS E IMPRESSORAS ----------
+:DISPOSITIVOS_IMPRESSORA
+cls
+control printers
+goto IMPRESSORA
+
+
+:: ---------- GERENCIAR DRIVERS ----------
+:GERENCIAR_DRIVER
+cls
+echo Abrindo console de gerenciamento de drivers...
+printmanagement.msc
+goto IMPRESSORA
+:: ==============================
+:LIMPEZA_MENU
+cls
+echo ===== LIMPEZAS DO SISTEMA =====
+echo.
+echo 1 - Limpar arquivos temporarios
+echo 2 - Limpar cache DNS
+echo 3 - Limpeza de Disco (Windows)
+echo 4 - Limpar PREFETCH
+echo 5 - Limpeza completa
+echo.
+echo 6 - Voltar
+echo.
+
+choice /c 123456 /n /m "Opcao: "
+
+if errorlevel 6 goto MENU
+if errorlevel 5 goto LIMPEZA_COMPLETA
+if errorlevel 4 goto LIMPAR_PREFETCH
+if errorlevel 3 cleanmgr
+if errorlevel 2 ipconfig /flushdns
+if errorlevel 1 goto LIMPAR_TEMP
+
 pause
-goto defender_menu
+goto LIMPEZA_MENU
+
+:LIMPAR_TEMP
+cls
+echo Limpando arquivos temporarios...
+del /s /q "%temp%\*" >nul 2>&1
+rmdir /s /q "%temp%" >nul 2>&1
+mkdir "%temp%" >nul 2>&1
+timeout /t 2 >nul
+goto LIMPEZA_MENU
+
+:LIMPAR_PREFETCH
+cls
+echo Limpando PREFETCH...
+del /s /q C:\Windows\Prefetch\* >nul 2>&1
+timeout /t 2 >nul
+goto LIMPEZA_MENU
+
+:LIMPEZA_COMPLETA
+cls
+echo Executando limpeza completa...
+ipconfig /flushdns
+del /s /q "%temp%\*" >nul 2>&1
+del /s /q C:\Windows\Prefetch\* >nul 2>&1
+timeout /t 3 >nul
+goto LIMPEZA_MENU
+
+:: ==============================
+:UPDATE_MENU
+cls
+echo ====================== WINDOWS UPDATE ======================
+echo.
+echo 1 - Abrir configuracoes do Windows Update
+echo 2 - Verificar por atualizacoes
+echo 3 - Reiniciar servicos do Windows Update
+echo 4 - Limpar cache do Windows Update
+echo 5 - Ver status dos servicos
+echo 6 - Reset completo do Windows Update
+echo.
+echo 7 - Voltar
+echo.
+choice /c 1234567 /n /m "Opcao: "
+
+if errorlevel 7 goto MENU
+if errorlevel 6 goto RESET_WU
+if errorlevel 5 goto STATUS_WU
+if errorlevel 4 goto LIMPAR_CACHE_WU
+if errorlevel 3 goto REINICIAR_SERVICOS_WU
+if errorlevel 2 goto VERIFICAR_WU
+if errorlevel 1 goto ABRIR_WU
+
+
+:: ---------- ABRIR WINDOWS UPDATE ----------
+:ABRIR_WU
+cls
+start ms-settings:windowsupdate
+goto UPDATE_MENU
+
+
+:: ---------- VERIFICAR POR ATUALIZACOES ----------
+:VERIFICAR_WU
+cls
+echo Forcando verificacao de atualizacoes...
+powershell -Command "UsoClient StartScan"
+timeout /t 3 >nul
+goto UPDATE_MENU
+
+
+:: ---------- REINICIAR SERVICOS ----------
+:REINICIAR_SERVICOS_WU
+cls
+echo Reiniciando servicos do Windows Update...
+net stop wuauserv
+net stop bits
+net stop cryptsvc
+net stop msiserver
+
+net start msiserver
+net start cryptsvc
+net start bits
+net start wuauserv
+
+timeout /t 2 >nul
+goto UPDATE_MENU
+
+
+:: ---------- LIMPAR CACHE ----------
+:LIMPAR_CACHE_WU
+cls
+echo Limpando cache do Windows Update...
+net stop wuauserv
+net stop bits
+rd /s /q %systemroot%\SoftwareDistribution
+md %systemroot%\SoftwareDistribution
+net start bits
+net start wuauserv
+timeout /t 2 >nul
+goto UPDATE_MENU
+
+
+:: ---------- STATUS DOS SERVICOS ----------
+:STATUS_WU
+cls
+echo Status dos servicos do Windows Update:
+echo.
+sc query wuauserv
+echo.
+sc query bits
+echo.
+sc query cryptsvc
+echo.
+pause
+goto UPDATE_MENU
+
+
+:: ---------- RESET COMPLETO ----------
+:RESET_WU
+cls
+echo Executando RESET COMPLETO do Windows Update...
+net stop wuauserv
+net stop bits
+net stop cryptsvc
+net stop msiserver
+
+Ren %systemroot%\SoftwareDistribution SoftwareDistribution.old
+Ren %systemroot%\System32\catroot2 catroot2.old
+
+net start msiserver
+net start cryptsvc
+net start bits
+net start wuauserv
+
+echo.
+echo Reset completo finalizado.
+timeout /t 3 >nul
+goto UPDATE_MENU
+
+:: ==============================
+:DEFENDER_MENU
+cls
+echo ===== WINDOWS DEFENDER =====
+echo.
+echo 1 - Abrir Seguranca do Windows
+echo 2 - Atualizar definicoes
+echo 3 - Verificacao rapida
+echo.
+echo 4 - Voltar
+echo.
+
+choice /c 1234 /n /m "Opcao: "
+
+if errorlevel 4 goto MENU
+if errorlevel 3 powershell Start-MpScan -ScanType QuickScan
+if errorlevel 2 powershell Update-MpSignature
+if errorlevel 1 start windowsdefender:
+
+pause
+goto DEFENDER_MENU
